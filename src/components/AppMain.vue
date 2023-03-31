@@ -15,6 +15,7 @@ export default {
 }
 </script>
 
+
 <template>
     <div v-if="store.movies.length > 0 || store.series.length > 0" class="movie-card-list">
         <AppCardMovie v-for="movie in store.movies" :movie="movie"></AppCardMovie>
@@ -26,6 +27,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 .movie-card-list {
     padding: 20px 0;
     display: flex;
