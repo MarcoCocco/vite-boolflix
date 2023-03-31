@@ -8,4 +8,7 @@ export const store = reactive({
     APIcall: 'https://api.themoviedb.org/3/',
     APIkey: '?api_key=79df9325d7b5c5e08286cf9835c23b59',
 
+    searchByName: '',
+    searchOption: '',
+
 });

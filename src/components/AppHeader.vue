@@ -1,21 +1,44 @@
 <script>
-import {store} from '../store.js';
+import { store } from '../store.js';
 
 export default {
-    name: 'AppHeader',
+  name: 'AppHeader',
   data() {
     return {
 
-        store,
+      store,
     }
-  }
+  },
+
+  emits: ['searchMovieTv'],
 }
 </script>
 
 <template>
-  
+  <div class="search-options">
+    <div id="selection-input">
+      <select v-model="store.searchOption" name="selection" id="selection">
+        <option value="">Seleziona</option>
+        <option value="movie">Film</option>
+        <option value="tv">Serie TV</option>
+      </select>
+    </div>
+    <div id="search-input">
+      <input v-model="store.searchByName" @keyup.enter="$emit('searchMovieTv')" type="text" placeholder="Cerca film o serie TV">
+    </div>
+    <div id="search-button">
+      <button @click="$emit('searchMovieTv')">Cerca</button>
+    </div>
+  </div>
+  <hr>
 </template>
 
 <style lang="scss" scoped>
-
+.search-options {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 </style>
