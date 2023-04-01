@@ -37,14 +37,12 @@ export default {
 
 <template>
   <div id="movie-card">
-    <div class="title">
-      <p>{{ movie.title }}</p>
-    </div>
     <div class="movie-image">
-
+      <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="img">
     </div>
-    <div class="original-title">
-      <p><em>({{ movie.original_title }})</em></p>
+    <div class="titles">
+      <p><strong>{{ movie.title }}</strong></p>
+      <p class="original-title"><em>({{ movie.original_title }})</em></p>
     </div>
     <div class="language">
       <span :class="`fi fi-${flagMovieIcons()}`"></span>
@@ -57,19 +55,29 @@ export default {
 
 <style lang="scss" scoped>
 #movie-card {
-  width: 300px;
-  padding: 10px;
+  width: 200px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
   gap: 10px;
   border: 1px solid red;
 
-  .title {
-    font-weight: bold;
+  .titles {
+
+    .original-title {
+      font-size: .8em;
+    }
   }
 
-  .original-title {
-    font-size: .8em;
+  .movie-image {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 }
 </style>

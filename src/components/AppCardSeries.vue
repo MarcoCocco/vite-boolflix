@@ -11,7 +11,7 @@ export default {
   },
 
   methods: {
-    flagSeriesIcons() {
+    flagSerieIcons() {
 
       let lang = this.serie.original_language;
 
@@ -37,14 +37,15 @@ export default {
 
 <template>
   <div id="serie-card">
-    <div class="title">
-      <p>{{ serie.name }}</p>
+    <div class="serie-image">
+      <img :src="'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="img">
     </div>
-    <div class="original-title">
-      <p><em>({{ serie.original_name }})</em></p>
+    <div class="titles">
+      <p><strong>{{ serie.name }}</strong></p>
+      <p class="original-title"><em>({{ serie.original_name }})</em></p>
     </div>
     <div class="language">
-      <span :class="`fi fi-${flagSeriesIcons()}`"></span>
+      <span :class="`fi fi-${flagSerieIcons()}`"></span>
     </div>
     <div class="vote">
       <p>{{ serie.vote_average }}</p>
@@ -54,19 +55,31 @@ export default {
 
 <style lang="scss" scoped>
 #serie-card {
-  width: 300px;
-  padding: 10px;
+  width: 200px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
   gap: 10px;
   border: 1px solid red;
 
-  .title {
-    font-weight: bold;
+  .titles {
+
+    .original-title {
+      font-size: .8em;
+    }
   }
 
-  .original-title {
-    font-size: .8em;
+  .serie-image {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
   }
+
+
 }
 </style>
