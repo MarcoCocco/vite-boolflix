@@ -5,7 +5,7 @@ export default {
   name: 'AppCardMovie',
   data() {
     return {
-
+  
       store,
     }
   },
@@ -26,12 +26,17 @@ export default {
       }
 
       return lang;
+
     },
+
   },
 
   props: {
     movie: Object,
-  }
+  },
+
+  
+
 }
 </script>
 
@@ -48,7 +53,8 @@ export default {
       <span :class="`fi fi-${flagMovieIcons()}`"></span>
     </div>
     <div class="vote">
-      <p>{{ movie.vote_average }}</p>
+      <i v-for=" star in Math.floor(movie.vote_average / 2)" class="fa-solid fa-star"></i>
+      <i v-for=" star in 5 - Math.floor(movie.vote_average / 2)" class="far fa-star"></i>
     </div>
   </div>
 </template>
@@ -78,6 +84,10 @@ export default {
     img {
       width: 100%;
     }
+  }
+
+  .fa-solid.fa-star {
+    color: rgb(247, 214, 29);
   }
 }
 </style>

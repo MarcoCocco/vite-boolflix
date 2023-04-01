@@ -48,7 +48,8 @@ export default {
       <span :class="`fi fi-${flagSerieIcons()}`"></span>
     </div>
     <div class="vote">
-      <p>{{ serie.vote_average }}</p>
+      <i v-for=" star in Math.floor(serie.vote_average / 2)" class="fa-solid fa-star"></i>
+      <i v-for=" star in 5 - Math.floor(serie.vote_average / 2)" class="far fa-star"></i>
     </div>
   </div>
 </template>
@@ -80,6 +81,9 @@ export default {
     }
   }
 
+  .fa-solid.fa-star {
+    color: rgb(247, 214, 29);
+  }
 
 }
 </style>
