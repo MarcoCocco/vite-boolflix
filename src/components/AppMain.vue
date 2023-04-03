@@ -17,25 +17,28 @@ export default {
 
 
 <template>
-    <div class="movies-list">
-        <h2>Film</h2>
-        <div v-if="store.movies.length > 0" class="movie-card-list">
-            <AppCardMovie v-for="movie in store.movies" :movie="movie"></AppCardMovie>
+    <div class="contain">
+        <div class="movies-list">
+            <h2>Film</h2>
+            <div v-if="store.movies.length > 0" class="movie-card-list">
+                <AppCardMovie v-for="movie in store.movies" :movie="movie"></AppCardMovie>
+            </div>
+            <div class="error-message" v-else>
+                <p>Nessun risultato</p>
+            </div>
         </div>
-        <div class="error-message" v-else>
-            <p>Nessun risultato</p>
+        <hr>
+        <div class="series-list">
+            <h2>Serie TV</h2>
+            <div v-if="store.series.length > 0" class="serie-card-list">
+                <AppCardSeries v-for="serie in store.series" :serie="serie"></AppCardSeries>
+            </div>
+            <div class="error-message" v-else>
+                <p>Nessun risultato</p>
+            </div>
         </div>
     </div>
-    <hr>
-    <div class="series-list">
-        <h2>Serie TV</h2>
-        <div v-if="store.series.length > 0" class="serie-card-list">
-            <AppCardSeries v-for="serie in store.series" :serie="serie"></AppCardSeries>
-        </div>
-        <div class="error-message" v-else>
-            <p>Nessun risultato</p>
-        </div>
-    </div>
+    <div class="film-details"></div>
 </template>
 
 <style lang="scss" scoped>
@@ -51,6 +54,7 @@ export default {
         display: flex;
         flex-flow: row;
         gap: 20px;
+        overflow-y: hidden;
         overflow-x: auto;
     }
 }
@@ -67,13 +71,14 @@ export default {
         display: flex;
         flex-flow: row;
         gap: 20px;
+        overflow-y: hidden;
         overflow-x: auto;
     }
 }
 
 .error-message {
+    margin-bottom: 20px;
     text-align: center;
-    margin-top: 50px;
     font-size: 1.4em;
 }
 </style>

@@ -56,9 +56,8 @@ export default {
         axios.get(`${this.store.APIcall}search/tv${this.store.APIkey}&query=${this.store.searchByName}`).then((res) => {
 
           this.store.series = res.data.results;
-
           resolve();
-
+          
         }).catch((err) => {
 
           if (err.response.status === 404) {
@@ -75,7 +74,7 @@ export default {
   created() {
 
     this.search();
-    
+
   }
 
 }
