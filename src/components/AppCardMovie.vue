@@ -5,7 +5,7 @@ export default {
   name: 'AppCardMovie',
   data() {
     return {
-  
+
       store,
     }
   },
@@ -35,8 +35,6 @@ export default {
     movie: Object,
   },
 
-  
-
 }
 </script>
 
@@ -45,31 +43,30 @@ export default {
     <div class="movie-image">
       <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="img">
     </div>
-    <div class="titles">
-      <p><strong>{{ movie.title }}</strong></p>
-      <p class="original-title"><em>({{ movie.original_title }})</em></p>
-    </div>
-    <div class="language">
-      <span :class="`fi fi-${flagMovieIcons()}`"></span>
-    </div>
-    <div class="vote">
-      <i v-for=" star in Math.floor(movie.vote_average / 2)" class="fa-solid fa-star"></i>
-      <i v-for=" star in 5 - Math.floor(movie.vote_average / 2)" class="far fa-star"></i>
+    <div class="movie-info">
+      <div class="titles">
+        <p><strong>{{ movie.title }}</strong></p>
+        <p class="original-title"><em>({{ movie.original_title }})</em></p>
+      </div>
+      <div class="language">
+        <span :class="`fi fi-${flagMovieIcons()}`"></span>
+      </div>
+      <div class="vote">
+        <i v-for=" star in Math.floor(movie.vote_average / 2)" class="fa-solid fa-star"></i>
+        <i v-for=" star in 5 - Math.floor(movie.vote_average / 2)" class="far fa-star"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 #movie-card {
-  width: 200px;
+  height: 300px;
   padding-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-  border: 1px solid red;
+  
+  .movie-info {
+    display: none;
+  }
 
   .titles {
 
@@ -82,7 +79,8 @@ export default {
     width: 100%;
 
     img {
-      width: 100%;
+      height: 300px;
+      object-fit: contain;
     }
   }
 

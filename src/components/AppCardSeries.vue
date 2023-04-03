@@ -40,31 +40,30 @@ export default {
     <div class="serie-image">
       <img :src="'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="img">
     </div>
-    <div class="titles">
-      <p><strong>{{ serie.name }}</strong></p>
-      <p class="original-title"><em>({{ serie.original_name }})</em></p>
-    </div>
-    <div class="language">
-      <span :class="`fi fi-${flagSerieIcons()}`"></span>
-    </div>
-    <div class="vote">
-      <i v-for=" star in Math.floor(serie.vote_average / 2)" class="fa-solid fa-star"></i>
-      <i v-for=" star in 5 - Math.floor(serie.vote_average / 2)" class="far fa-star"></i>
+    <div class="serie-info">
+      <div class="titles">
+        <p><strong>{{ serie.name }}</strong></p>
+        <p class="original-title"><em>({{ serie.original_name }})</em></p>
+      </div>
+      <div class="language">
+        <span :class="`fi fi-${flagSerieIcons()}`"></span>
+      </div>
+      <div class="vote">
+        <i v-for=" star in Math.floor(serie.vote_average / 2)" class="fa-solid fa-star"></i>
+        <i v-for=" star in 5 - Math.floor(serie.vote_average / 2)" class="far fa-star"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 #serie-card {
-  width: 200px;
+  height: 300px;
   padding-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-  border: 1px solid red;
+
+  .serie-info {
+    display: none;
+  }
 
   .titles {
 
@@ -77,7 +76,8 @@ export default {
     width: 100%;
 
     img {
-      width: 100%;
+      height: 300px;
+      object-fit: contain;
     }
   }
 

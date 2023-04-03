@@ -20,23 +20,21 @@ export default {
 
   methods: {
 
-    //Creo una funzione che mi permette di costruire una chiamata API di ricerca di film o serieTV in base ai parametri inseriti dall'utente.
-    //Il risultato della chiamata verrà trasferita negli array vuoti di movies e series contenuti in store grazie alla select.
-    getAPIcallMovieSeries() {
+    search() {
+
+      this.getAPIcallMovies();
+      this.getAPIcallSeries();
+
+    },
+
+
+    getAPIcallMovies() {
       this.store.movies = [];
-      this.store.series = [];
 
-      //Aggiungo una Promise all'interno della funzione per risolvere la chiamata prima di accedere ai dati, così da poterli avere solo quando sono disponibili.
       return new Promise((resolve) => {
-        axios.get(`${this.store.APIcall}search/${this.store.searchOption + this.store.APIkey}&query=${this.store.searchByName}`).then((res) => {
+        axios.get(`${this.store.APIcall}search/movie${this.store.APIkey}&query=${this.store.searchByName}`).then((res) => {
 
-          if (this.store.searchOption === 'movie') {
-            this.store.movies = res.data.results;
-          };
-
-          if (this.store.searchOption === 'tv') {
-            this.store.series = res.data.results;
-          };
+          this.store.movies = res.data.results;
 
           resolve();
 
@@ -44,6 +42,26 @@ export default {
 
           if (err.response.status === 404) {
             this.store.movies = [];
+          }
+        });
+
+      });
+
+    },
+
+    getAPIcallSeries() {
+      this.store.series = [];
+
+      return new Promise((resolve) => {
+        axios.get(`${this.store.APIcall}search/tv${this.store.APIkey}&query=${this.store.searchByName}`).then((res) => {
+
+          this.store.series = res.data.results;
+
+          resolve();
+
+        }).catch((err) => {
+
+          if (err.response.status === 404) {
             this.store.series = [];
           }
         });
@@ -55,17 +73,17 @@ export default {
   },
 
   created() {
-    //Richiamo la funzione di chiamata API.
-    this.getAPIcallMovieSeries();
 
-  },
+    this.search();
+    
+  }
 
 }
 
 </script>
 
 <template>
-  <AppHeader @searchMovieTv="getAPIcallMovieSeries()"></AppHeader>
+  <AppHeader @searchMovieTv="search()"></AppHeader>
   <AppMain></AppMain>
 </template>
 

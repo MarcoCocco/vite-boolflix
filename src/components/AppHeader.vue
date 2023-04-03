@@ -16,13 +16,6 @@ export default {
 
 <template>
   <div class="search-options">
-    <div id="selection-input">
-      <select v-model="store.searchOption" name="selection" id="selection">
-        <option value="">Seleziona</option>
-        <option value="movie">Film</option>
-        <option value="tv">Serie TV</option>
-      </select>
-    </div>
     <div id="search-input">
       <input v-model="store.searchByName" @keyup.enter="$emit('searchMovieTv')" type="text" placeholder="Cerca film o serie TV">
     </div>
