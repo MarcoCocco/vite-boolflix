@@ -71,7 +71,7 @@ export default {
 
   <div v-show="movieInfo" class="film-details">
     <div class="go-back">
-      <i @click="movieDetailsClosed()" class="fa-solid fa-chevron-left"></i>
+      <i @click="movieDetailsClosed()" class="fa-solid fa-xmark"></i>
     </div>
     <div class="info">
       <div class="general-info">

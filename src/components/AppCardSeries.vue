@@ -71,7 +71,7 @@ export default {
 
   <div v-show="serieInfo" class="serie-details">
     <div class="go-back">
-      <i @click="serieDetailsClosed()" class="fa-solid fa-chevron-left"></i>
+      <i @click="serieDetailsClosed()" class="fa-solid fa-xmark"></i>
     </div>
     <div class="info">
       <div class="general-info">
