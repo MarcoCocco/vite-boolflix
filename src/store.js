@@ -9,5 +9,5 @@ export const store = reactive({
     APIkey: '?api_key=79df9325d7b5c5e08286cf9835c23b59',
 
     searchByName: '',
-
+    
 });

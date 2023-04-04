@@ -7,12 +7,12 @@ export default {
     return {
 
       store,
+      serieInfo: false,
     }
   },
 
   methods: {
     flagSerieIcons() {
-
       let lang = this.serie.original_language;
 
       if (lang === "en") {
@@ -27,16 +27,27 @@ export default {
 
       return lang;
     },
+
+    serieDetailsClosed() {
+      this.serieInfo = false;
+    },
+
+    serieDetailsOpen() {
+      this.serieInfo = true;
+
+    },
+
   },
 
   props: {
     serie: Object,
-  }
+  },
+
 }
 </script>
 
 <template>
-  <div id="serie-card">
+  <div @click="serieDetailsOpen()" id="serie-card">
     <div class="card-side front">
       <div class="serie-image">
         <img :src="'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="img">
@@ -45,7 +56,7 @@ export default {
     <div class="card-side back">
       <div class="titles">
         <p><strong>{{ serie.name }}</strong></p>
-        <p class="original-title"><em>({{ serie.original_name}})</em></p>
+        <p class="original-title"><em>({{ serie.original_name }})</em></p>
       </div>
       <div class="language">
         <span :class="`fi fi-${flagSerieIcons()}`"></span>
@@ -57,12 +68,43 @@ export default {
       </div>
     </div>
   </div>
+
+  <div v-show="serieInfo" class="serie-details">
+    <div class="go-back">
+      <i @click="serieDetailsClosed()" class="fa-solid fa-chevron-left"></i>
+    </div>
+    <div class="info">
+      <div class="general-info">
+        <h1>{{ serie.name }}</h1>
+        <p><em>({{ serie.original_name}})</em></p>
+        <small><em>{{ serie.release_date }}</em></small><br>
+        <span :class="`fi fi-${flagSerieIcons()}`"></span>
+      </div>
+      <div class="plot">
+        <p><strong>Trama:</strong></p>
+        <p>{{ serie.overview }}</p>
+      </div>
+      <div class="voteRating">
+        <p>Voto</p>
+        <i v-for=" star in Math.floor(serie.vote_average / 2)" class="fa-solid fa-star"></i>
+        <i v-for=" star in 5 - Math.floor(serie.vote_average / 2)" class="far fa-star"></i><br>
+        <span><small><em>({{ serie.vote_count }})</em></small></span>
+      </div>
+    </div>
+    <div class="poster">
+      <img :src="'https://image.tmdb.org/t/p/original/' + serie.poster_path" alt="img">
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 #serie-card {
   height: 300px;
   position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   .card-side {
     backface-visibility: hidden;
@@ -101,7 +143,6 @@ export default {
     top: 0;
     left: 0;
     text-align: center;
-    border: 1px solid red;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 8px 7px -3px rgba(0, 0, 0, 0.7);
   }
@@ -119,6 +160,62 @@ export default {
 
   &:hover .card-side.back {
     transform: rotateY(0deg);
+  }
+
+}
+
+.serie-details {
+  width: 60%;
+  height: 80%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0);
+
+  .go-back {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 2em;
+    transition: all .1s;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+  }
+
+  .info {
+    padding: 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    text-align: center;
+
+    .plot {
+      text-align: left;
+    }
+
+    .fa-solid.fa-star {
+      color: rgb(247, 214, 29);
+    }
+  }
+
+  .poster {
+
+    img {
+      height: 100%;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
   }
 
 }

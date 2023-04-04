@@ -35,7 +35,6 @@ export default {
         axios.get(`${this.store.APIcall}search/movie${this.store.APIkey}&query=${this.store.searchByName}`).then((res) => {
 
           this.store.movies = res.data.results;
-
           resolve();
 
         }).catch((err) => {
