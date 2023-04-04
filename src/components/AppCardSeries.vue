@@ -164,9 +164,19 @@ export default {
 
 }
 
+@keyframes infoAnimEntrance {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .serie-details {
-  width: 60%;
-  height: 80%;
+  width: 50%;
+  height: 60%;
   display: flex;
   justify-content: space-between;
   z-index: 3;
@@ -175,27 +185,30 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 20px;
-  background-color: rgba(0, 0, 0);
+  background-color: #111111;
+  box-shadow: 10px 10px 7px -3px rgba(0, 0, 0, 0.8);
+  animation: infoAnimEntrance .8s ease 0s 1 normal forwards;
 
   .go-back {
     position: absolute;
-    top: 10px;
-    left: 20px;
+    top: 0;
+    left: 10px;
     font-size: 2em;
-    transition: all .1s;
+    transition: all .4s;
 
     &:hover {
       cursor: pointer;
-      transform: scale(1.2);
+      transform: scale(1.4);
+      color: #d81f26;
     }
   }
 
   .info {
-    padding: 40px;
+    padding: 20px 40px;
+    overflow: auto;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 3em;
     text-align: center;

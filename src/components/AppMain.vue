@@ -24,22 +24,26 @@ export default {
         <div class="movies-list">
             <h2>Film</h2>
             <div v-if="store.movies.length > 0" class="movie-card-list">
-                <AppCardMovie v-for="movie in store.movies" :movie="movie">
-                </AppCardMovie>
+                <AppCardMovie v-for="movie in store.movies" :movie="movie"></AppCardMovie>
+            </div>
+            <div class="trending-movies" v-else>
+                <h3><em> In tendenza questa settimana</em></h3>
+                <div class="trending-movies-list">
+                    <AppCardMovie v-for="movie in store.trendingMovies" :movie="movie"></AppCardMovie>
+                </div>
+            </div>
 
-            </div>
-            <div class="error-message" v-else>
-                <p>Nessun risultato</p>
-            </div>
-        </div>
-
-        <div class="series-list">
-            <h2>Serie TV</h2>
-            <div v-if="store.series.length > 0" class="serie-card-list">
-                <AppCardSeries v-for="serie in store.series" :serie="serie"></AppCardSeries>
-            </div>
-            <div class="error-message" v-else>
-                <p>Nessun risultato</p>
+            <div class="series-list">
+                <h2>Serie TV</h2>
+                <div v-if="store.series.length > 0" class="serie-card-list">
+                    <AppCardSeries v-for="serie in store.series" :serie="serie"></AppCardSeries>
+                </div>
+                <div class="trending-series" v-else>
+                    <h3><em> In tendenza questa settimana</em></h3>
+                    <div class="trending-series-list">
+                        <AppCardSeries v-for="serie in store.trendingSeries" :serie="serie"></AppCardSeries>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -68,6 +72,23 @@ export default {
         }
     }
 
+    .trending-movies {
+
+        h3 {
+            padding-left: 10px;
+        }
+
+        .trending-movies-list {
+            padding: 10px;
+            display: flex;
+            flex-flow: row;
+            gap: 10px;
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
+
+    }
+
     .series-list {
 
         h2 {
@@ -84,15 +105,24 @@ export default {
         }
     }
 
-    .error-message {
-        margin-bottom: 20px;
-        text-align: center;
-        font-size: 1.4em;
+    .trending-series {
+
+        h3 {
+            padding-left: 10px;
+        }
+
+        .trending-series-list {
+            padding: 10px;
+            display: flex;
+            flex-flow: row;
+            gap: 10px;
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
+
     }
 
 }
-
-
 </style>
 
 

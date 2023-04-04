@@ -56,7 +56,7 @@ export default {
 
           this.store.series = res.data.results;
           resolve();
-          
+
         }).catch((err) => {
 
           if (err.response.status === 404) {
@@ -73,6 +73,28 @@ export default {
   created() {
 
     this.search();
+
+    axios.get(`${this.store.APIcall}/trending/tv/week${this.store.APIkey}`).then((res) => {
+
+      this.store.trendingSeries = res.data.results;
+
+    }).catch((err) => {
+
+      if (err.response.status === 404) {
+        this.store.trendingSeries = [];
+      }
+    });
+
+    axios.get(`${this.store.APIcall}/trending/movie/week${this.store.APIkey}`).then((res) => {
+
+      this.store.trendingMovies = res.data.results;
+
+    }).catch((err) => {
+
+      if (err.response.status === 404) {
+        this.store.trendingMovies = [];
+      }
+    });
 
   }
 
