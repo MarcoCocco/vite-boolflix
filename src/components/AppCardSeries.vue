@@ -101,7 +101,8 @@ export default {
     top: 0;
     left: 0;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid red;
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 8px 7px -3px rgba(0, 0, 0, 0.7);
   }
 

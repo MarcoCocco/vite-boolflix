@@ -17,7 +17,7 @@ export default {
 
 
 <template>
-    <div class="contain">
+    <div class="container">
         <div class="movies-list">
             <h2>Film</h2>
             <div v-if="store.movies.length > 0" class="movie-card-list">
@@ -27,7 +27,7 @@ export default {
                 <p>Nessun risultato</p>
             </div>
         </div>
-        <hr>
+    
         <div class="series-list">
             <h2>Serie TV</h2>
             <div v-if="store.series.length > 0" class="serie-card-list">
@@ -42,44 +42,49 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.movies-list {
+.container {
+padding-top: 80px;
+display: flex;
+flex-direction: column;
 
-    h2 {
+    .movies-list {
+    
+        h2 {
+            padding: 10px;
+        }
+    
+        .movie-card-list {
+            padding: 10px;
+            display: flex;
+            flex-flow: row;
+            gap: 10px;
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
+    }
+    
+    .series-list {
+    
+        h2 {
+            padding: 10px;
+        }
+    
+        .serie-card-list {
+            padding: 10px;
+            display: flex;
+            flex-flow: row;
+            gap: 10px;
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
+    }
+    
+    .error-message {
+        margin-bottom: 20px;
         text-align: center;
-        padding: 10px 0;
+        font-size: 1.4em;
     }
 
-    .movie-card-list {
-        padding: 20px;
-        display: flex;
-        flex-flow: row;
-        gap: 20px;
-        overflow-y: hidden;
-        overflow-x: auto;
-    }
-}
-
-.series-list {
-
-    h2 {
-        text-align: center;
-        padding: 10px 0;
-    }
-
-    .serie-card-list {
-        padding: 20px;
-        display: flex;
-        flex-flow: row;
-        gap: 20px;
-        overflow-y: hidden;
-        overflow-x: auto;
-    }
-}
-
-.error-message {
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 1.4em;
 }
 </style>
 
