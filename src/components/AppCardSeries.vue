@@ -78,7 +78,7 @@ export default {
         <span :class="`fi fi-${flagSerieIcons()}`"></span>
       </div>
       <div class="genre">
-        <p>Genere: {{ getGenreSerieNames().join(', ') }}</p>
+        <p>{{ getGenreSerieNames().join(', ') }}</p>
       </div>
       <div class="vote">
         <p>Voto</p>

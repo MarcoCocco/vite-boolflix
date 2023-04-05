@@ -78,7 +78,7 @@ export default {
         <span :class="`fi fi-${flagMovieIcons()}`"></span>
       </div>
       <div class="genre">
-        <p>Genere: {{ getGenreMovieNames().join(', ') }}</p>
+        <p>{{ getGenreMovieNames().join(', ') }}</p>
       </div>
       <div class="vote">
         <p>Voto</p>
