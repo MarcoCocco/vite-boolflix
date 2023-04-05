@@ -99,7 +99,7 @@ export default {
         <small><em>{{ movie.release_date }}</em></small><br>
         <span :class="`fi fi-${flagMovieIcons()}`"></span>
         <div class="genre">
-          <p>Genere: {{ getGenreMovieNames().join(', ') }}</p>
+          <p>{{ getGenreMovieNames().join(', ') }}</p>
         </div>
       </div>
       <div class="plot">

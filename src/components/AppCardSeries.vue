@@ -99,7 +99,7 @@ export default {
         <small><em>{{ serie.release_date }}</em></small><br>
         <span :class="`fi fi-${flagSerieIcons()}`"></span>
         <div class="genre">
-          <p>Genere: {{ getGenreSerieNames().join(', ') }}</p>
+          <p>{{ getGenreSerieNames().join(', ') }}</p>
         </div>
       </div>
       <div class="plot">
