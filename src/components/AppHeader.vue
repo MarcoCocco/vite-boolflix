@@ -28,6 +28,7 @@ export default {
         <button @click="$emit('searchMovieTv')"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -73,7 +74,7 @@ export default {
         &:hover {
           border-bottom: 2px solid red;
         }
-        
+
       }
     }
 

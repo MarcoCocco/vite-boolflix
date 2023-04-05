@@ -21,10 +21,8 @@ export default {
   methods: {
 
     search() {
-
       this.getAPIcallMovies();
       this.getAPIcallSeries();
-
     },
 
 
@@ -35,12 +33,13 @@ export default {
         axios.get(`${this.store.APIcall}search/movie${this.store.APIkey}&query=${this.store.searchByName}`).then((res) => {
 
           this.store.movies = res.data.results;
+          console.log(res)
           resolve();
 
         }).catch((err) => {
-
           if (err.response.status === 404) {
             this.store.movies = [];
+            store.haveNoResults = true;
           }
         });
 
@@ -58,7 +57,6 @@ export default {
           resolve();
 
         }).catch((err) => {
-
           if (err.response.status === 404) {
             this.store.series = [];
           }
@@ -79,7 +77,6 @@ export default {
       this.store.trendingSeries = res.data.results;
 
     }).catch((err) => {
-
       if (err.response.status === 404) {
         this.store.trendingSeries = [];
       }
@@ -90,10 +87,10 @@ export default {
       this.store.trendingMovies = res.data.results;
 
     }).catch((err) => {
-
       if (err.response.status === 404) {
         this.store.trendingMovies = [];
       }
+
     });
 
   }

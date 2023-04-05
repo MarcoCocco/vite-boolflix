@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios';
 import { store } from '../store.js';
 
 export default {
@@ -34,8 +35,13 @@ export default {
 
     serieDetailsOpen() {
       this.serieInfo = true;
-
     },
+
+    getGenreSerieNames() {
+      let genres = this.store.genreSerieList.filter(genre => this.serie.genre_ids.includes(genre.id));
+      let genreNames = genres.map(genre => genre.name);
+      return genreNames;
+    }
 
   },
 
@@ -43,13 +49,23 @@ export default {
     serie: Object,
   },
 
+  created() {
+
+    axios.get(`${this.store.APIcall}/genre/tv/list${this.store.APIkey}`).then((res) => {
+
+      this.store.genreSerieList = res.data.genres;
+
+    });
+
+  }
+
 }
 </script>
 
 <template>
-  <div @click="serieDetailsOpen()" id="serie-card">
+  <div @click="serieDetailsOpen()" id="card">
     <div class="card-side front">
-      <div class="serie-image">
+      <div class="card-image">
         <img :src="'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="img">
       </div>
     </div>
@@ -61,6 +77,9 @@ export default {
       <div class="language">
         <span :class="`fi fi-${flagSerieIcons()}`"></span>
       </div>
+      <div class="genre">
+        <p>Genere: {{ getGenreSerieNames().join(', ') }}</p>
+      </div>
       <div class="vote">
         <p>Voto</p>
         <i v-for=" star in Math.floor(serie.vote_average / 2)" class="fa-solid fa-star"></i>
@@ -69,16 +88,19 @@ export default {
     </div>
   </div>
 
-  <div v-show="serieInfo" class="serie-details">
+  <div v-show="serieInfo" class="card-details">
     <div class="go-back">
       <i @click="serieDetailsClosed()" class="fa-solid fa-xmark"></i>
     </div>
     <div class="info">
       <div class="general-info">
         <h1>{{ serie.name }}</h1>
-        <p><em>({{ serie.original_name}})</em></p>
+        <p><em>({{ serie.original_name }})</em></p>
         <small><em>{{ serie.release_date }}</em></small><br>
         <span :class="`fi fi-${flagSerieIcons()}`"></span>
+        <div class="genre">
+          <p>Genere: {{ getGenreSerieNames().join(', ') }}</p>
+        </div>
       </div>
       <div class="plot">
         <p><strong>Trama:</strong></p>
@@ -98,7 +120,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-#serie-card {
+#card {
   height: 300px;
   position: relative;
 
@@ -111,7 +133,7 @@ export default {
     transition: all 0.8s ease;
   }
 
-  .serie-image {
+  .card-image {
     width: 200px;
     display: flex;
     align-items: center;
@@ -174,7 +196,7 @@ export default {
   }
 }
 
-.serie-details {
+.card-details {
   width: 50%;
   height: 60%;
   display: flex;

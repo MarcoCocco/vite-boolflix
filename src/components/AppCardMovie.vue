@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios';
 import { store } from '../store.js';
 
 export default {
@@ -34,8 +35,13 @@ export default {
 
     movieDetailsOpen() {
       this.movieInfo = true;
-
     },
+
+    getGenreMovieNames() {
+      let genres = this.store.genreMovieList.filter(genre => this.movie.genre_ids.includes(genre.id));
+      let genreNames = genres.map(genre => genre.name);
+      return genreNames;
+    }
 
   },
 
@@ -43,13 +49,23 @@ export default {
     movie: Object,
   },
 
+  created() {
+
+    axios.get(`${this.store.APIcall}/genre/movie/list${this.store.APIkey}`).then((res) => {
+
+      this.store.genreMovieList = res.data.genres;
+
+    });
+
+  }
+
 }
 </script>
 
 <template>
-  <div @click="movieDetailsOpen()" id="movie-card">
+  <div @click="movieDetailsOpen()" id="card">
     <div class="card-side front">
-      <div class="movie-image">
+      <div class="card-image">
         <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="img">
       </div>
     </div>
@@ -61,6 +77,9 @@ export default {
       <div class="language">
         <span :class="`fi fi-${flagMovieIcons()}`"></span>
       </div>
+      <div class="genre">
+        <p>Genere: {{ getGenreMovieNames().join(', ') }}</p>
+      </div>
       <div class="vote">
         <p>Voto</p>
         <i v-for=" star in Math.floor(movie.vote_average / 2)" class="fa-solid fa-star"></i>
@@ -69,7 +88,7 @@ export default {
     </div>
   </div>
 
-  <div v-show="movieInfo" class="film-details">
+  <div v-show="movieInfo" class="card-details">
     <div class="go-back">
       <i @click="movieDetailsClosed()" class="fa-solid fa-xmark"></i>
     </div>
@@ -79,6 +98,9 @@ export default {
         <p><em>({{ movie.original_title }})</em></p>
         <small><em>{{ movie.release_date }}</em></small><br>
         <span :class="`fi fi-${flagMovieIcons()}`"></span>
+        <div class="genre">
+          <p>Genere: {{ getGenreMovieNames().join(', ') }}</p>
+        </div>
       </div>
       <div class="plot">
         <p><strong>Trama:</strong></p>
@@ -98,7 +120,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-#movie-card {
+#card {
   height: 300px;
   position: relative;
 
@@ -111,7 +133,7 @@ export default {
     transition: all 0.8s ease;
   }
 
-  .movie-image {
+  .card-image {
     width: 200px;
     display: flex;
     align-items: center;
@@ -174,7 +196,7 @@ export default {
   }
 }
 
-.film-details {
+.card-details {
   width: 50%;
   height: 60%;
   display: flex;
